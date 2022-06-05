@@ -1,21 +1,32 @@
 import { useRef } from "react";
-import { View } from "react-native";
 import { WebView } from "react-native-webview";
+
 import Screen from "../components/Screen";
+import useToken from "../hooks/useToken";
 
 function HomeScreen() {
   const webviewRef = useRef();
 
+  const { script, setToken } = useToken();
+
+  const handleMessage = ({ nativeEvent }) => {
+    const messageFromWebView = nativeEvent.data;
+
+    if (messageFromWebView.includes("token")) {
+      setToken(messageFromWebView);
+    }
+  };
+
   return (
     <Screen>
-      <View style={{ width: "100%", height: "100%" }}>
-        <WebView
-          source={{
-            uri: "https://629b04d5ac0b813c98a5a8a4--preeminent-licorice-96005b.netlify.app/",
-          }}
-          ref={webviewRef}
-        />
-      </View>
+      <WebView
+        source={{
+          uri: "http://192.168.0.29:3000/",
+        }}
+        ref={webviewRef}
+        onMessage={handleMessage}
+        injectedJavaScript={script}
+      />
     </Screen>
   );
 }
