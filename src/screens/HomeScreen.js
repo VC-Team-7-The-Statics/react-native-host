@@ -13,7 +13,9 @@ function HomeScreen() {
     const messageFromWebView = nativeEvent.data;
 
     if (messageFromWebView.includes("token")) {
-      setToken(messageFromWebView);
+      const token = messageFromWebView.split(" ")[1];
+
+      setToken(token);
     }
   };
 
