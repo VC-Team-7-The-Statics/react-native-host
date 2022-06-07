@@ -3,9 +3,7 @@ class IntegrationService {
     this.storage = storage;
   }
 
-  getTokenFromStorage = async () => {
-    return await this.storage.getItem("token");
-  };
+  getTokenFromStorage = async () => await this.storage.getItem("token");
 
   setTokenToStorage = async (token) => {
     await this.storage.setItem("token", token);
