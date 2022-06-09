@@ -34,7 +34,7 @@ function HomeScreen() {
     <Screen>
       <WebView
         source={{
-          uri: "http://192.168.0.29:3000/",
+          uri: "http://192.168.0.35:3000/",
         }}
         ref={webviewRef}
         onMessage={handleMessage}
