@@ -26,6 +26,11 @@ function useToken() {
   useEffect(() => {
     if (token) {
       Storage.setTokenToStorage(token);
+      setScript(`
+        window.isNativeApp = true;
+        window.token = "${token}";
+        true;
+      `);
     }
   }, [token]);
 

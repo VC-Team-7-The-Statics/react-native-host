@@ -1,14 +1,15 @@
 import { useState, useEffect } from "react";
 import * as Location from "expo-location";
 
-const SEOUL_STATION_COORDINATES = JSON.stringify({
+const SEOUL_STATION_COORDINATES = {
   longitude: 37.5559,
   latitude: 126.9723,
-});
+};
 
 function useForeGroundLocation() {
-  const [location, setLocation] = useState();
-  const [error, setError] = useState();
+  const [longitude, setLongitude] = useState("");
+  const [latitude, setLatitude] = useState("");
+  const [error, setError] = useState("");
 
   useEffect(() => {
     const requestLocation = async () => {
@@ -20,12 +21,8 @@ function useForeGroundLocation() {
 
       const location = await Location.getCurrentPositionAsync({});
 
-      const coordinates = JSON.stringify({
-        longitude: location.coords.longitude,
-        latitude: location.coords.latitude,
-      });
-
-      setLocation(coordinates);
+      setLongitude(location.coords.longitude);
+      setLatitude(location.coords.latitude);
     };
 
     requestLocation();
@@ -33,11 +30,12 @@ function useForeGroundLocation() {
 
   useEffect(() => {
     if (error) {
-      setLocation(SEOUL_STATION_COORDINATES);
+      setLongitude(SEOUL_STATION_COORDINATES.longitude);
+      setLatitude(SEOUL_STATION_COORDINATES.latitude);
     }
   }, [error]);
 
-  return { location };
+  return { longitude, latitude };
 }
 
 export default useForeGroundLocation;
