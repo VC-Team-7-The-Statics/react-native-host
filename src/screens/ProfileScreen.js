@@ -1,4 +1,5 @@
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
+import { BackHandler } from "react-native";
 import { WebView } from "react-native-webview";
 
 import Screen from "../components/Screen";
@@ -13,9 +14,30 @@ function ProfileScreen() {
     const messageFromWebView = nativeEvent.data;
 
     if (messageFromWebView.includes("token")) {
-      setToken(messageFromWebView);
+      const token = messageFromWebView.split(" ")[1];
+
+      return setToken(token);
     }
   };
+
+  useEffect(() => {
+    const handleBackButtonPress = () => {
+      if (webviewRef.current) {
+        webviewRef.current.goBack();
+        return true;
+      }
+
+      return false;
+    };
+
+    BackHandler.addEventListener("hardwareBackPress", handleBackButtonPress);
+
+    return () =>
+      BackHandler.removeEventListener(
+        "hardwareBackPress",
+        handleBackButtonPress
+      );
+  }, []);
 
   return (
     <Screen>

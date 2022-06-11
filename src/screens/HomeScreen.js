@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { WebView } from "react-native-webview";
 import * as ImagePicker from "expo-image-picker";
+import { BackHandler } from "react-native";
 
 import Screen from "../components/Screen";
 import useForeGroundLocation from "../hooks/useForeGroundLocation";
@@ -60,6 +61,25 @@ function HomeScreen() {
       true;
     `);
   }, [base64]);
+
+  useEffect(() => {
+    const handleBackButtonPress = () => {
+      if (webviewRef.current) {
+        webviewRef.current.goBack();
+        return true;
+      }
+
+      return false;
+    };
+
+    BackHandler.addEventListener("hardwareBackPress", handleBackButtonPress);
+
+    return () =>
+      BackHandler.removeEventListener(
+        "hardwareBackPress",
+        handleBackButtonPress
+      );
+  }, []);
 
   return (
     <Screen>
