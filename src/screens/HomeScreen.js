@@ -11,6 +11,7 @@ function HomeScreen() {
   const webviewRef = useRef();
 
   const [base64, setBase64] = useState("");
+  const [navState, setNavState] = useState({});
 
   const { script, setToken } = useToken();
   const { longitude, latitude } = useForeGroundLocation();
@@ -41,6 +42,10 @@ function HomeScreen() {
     if (messageFromWebView === "open gallery") {
       pickImage();
     }
+
+    if (messageFromWebView === "navigationStateChange") {
+      setNavState(nativeEvent);
+    }
   };
 
   useEffect(() => {
@@ -64,7 +69,7 @@ function HomeScreen() {
 
   useEffect(() => {
     const handleBackButtonPress = () => {
-      if (webviewRef.current) {
+      if (webviewRef.current && navState.canGoBack) {
         webviewRef.current.goBack();
         return true;
       }
@@ -79,7 +84,7 @@ function HomeScreen() {
         "hardwareBackPress",
         handleBackButtonPress
       );
-  }, []);
+  }, [navState.canGoBack]);
 
   return (
     <Screen>
@@ -90,6 +95,7 @@ function HomeScreen() {
         ref={webviewRef}
         onMessage={handleMessage}
         injectedJavaScript={script}
+        onNavigationStateChange={setNavState}
       />
     </Screen>
   );

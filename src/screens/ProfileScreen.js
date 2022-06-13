@@ -42,7 +42,7 @@ function ProfileScreen() {
   return (
     <Screen>
       <WebView
-        source={{ uri: "https://shiny-druid-4172be.netlify.app" }}
+        source={{ uri: "http://192.168.0.29:3001/" }}
         ref={webviewRef}
         onMessage={handleMessage}
         injectedJavaScript={script}
