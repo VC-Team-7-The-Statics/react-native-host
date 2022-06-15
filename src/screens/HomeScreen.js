@@ -3,9 +3,12 @@ import { WebView } from "react-native-webview";
 import * as ImagePicker from "expo-image-picker";
 import { BackHandler } from "react-native";
 
+import getEnvVars from "../../secrets";
 import Screen from "../components/Screen";
 import useForeGroundLocation from "../hooks/useForeGroundLocation";
 import useToken from "../hooks/useToken";
+
+const { HOME_SCREEN_URL } = getEnvVars();
 
 function HomeScreen() {
   const webviewRef = useRef();
@@ -90,7 +93,7 @@ function HomeScreen() {
     <Screen>
       <WebView
         source={{
-          uri: "http://192.168.0.29:3000/",
+          uri: HOME_SCREEN_URL,
         }}
         ref={webviewRef}
         onMessage={handleMessage}
