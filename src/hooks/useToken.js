@@ -49,7 +49,7 @@ function useToken() {
     }
   }, [token]);
 
-  return { script, setToken };
+  return { script, setToken, token };
 }
 
 export default useToken;
