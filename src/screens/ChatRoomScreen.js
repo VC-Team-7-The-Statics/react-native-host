@@ -85,12 +85,10 @@ function ChatRoomScreen({ route }) {
     const chat = {
       id: userId,
       text: input,
-      createdAt: new Date(),
+      createdAt: Date.now(),
     };
 
     setChats((prev) => [...prev, chat]);
-
-    delete chat.createdAt;
 
     socket.emit("chat", chat);
     setInput("");
