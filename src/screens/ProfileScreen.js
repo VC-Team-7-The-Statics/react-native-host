@@ -42,7 +42,7 @@ function ProfileScreen() {
   return (
     <Screen>
       <WebView
-        source={{ uri: "http://192.168.0.29:3001/" }}
+        source={{ uri: "http://192.168.0.35:3002" }}
         ref={webviewRef}
         onMessage={handleMessage}
         injectedJavaScript={script}

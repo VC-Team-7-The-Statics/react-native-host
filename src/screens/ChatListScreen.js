@@ -46,7 +46,7 @@ function ChatListScreen() {
   return (
     <Screen>
       <WebView
-        source={{ uri: "https://cosmic-semolina-b6e8c3.netlify.app" }}
+        source={{ uri: "http://192.168.0.35:3001/chatlist" }}
         ref={webviewRef}
         onMessage={handleMessage}
         injectedJavaScript={script}
