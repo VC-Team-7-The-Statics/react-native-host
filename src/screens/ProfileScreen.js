@@ -1,12 +1,17 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { BackHandler } from "react-native";
 import { WebView } from "react-native-webview";
 
+import getEnvVars from "../../secrets";
 import Screen from "../components/Screen";
 import useToken from "../hooks/useToken";
 
-function ProfileScreen() {
+const { PROFILE_SCREEN_URL } = getEnvVars();
+
+function ProfileScreen({ navigation }) {
   const webviewRef = useRef();
+
+  const [navState, setNavState] = useState({});
 
   const { script, setToken } = useToken();
 
@@ -18,11 +23,25 @@ function ProfileScreen() {
 
       return setToken(token);
     }
+
+    if (messageFromWebView === "navigationStateChange") {
+      return setNavState(nativeEvent);
+    }
+
+    const parsedMessage = JSON.parse(messageFromWebView);
+
+    if (parsedMessage.type === "CHATROOM_FROM_PROFILE") {
+      navigation.navigate("ChatRoom", {
+        userId: parsedMessage.userId,
+        roomId: parsedMessage.roomId,
+        friendId: parsedMessage.friendId,
+      });
+    }
   };
 
   useEffect(() => {
     const handleBackButtonPress = () => {
-      if (webviewRef.current) {
+      if (webviewRef.current && navState.canGoBack) {
         webviewRef.current.goBack();
         return true;
       }
@@ -37,15 +56,16 @@ function ProfileScreen() {
         "hardwareBackPress",
         handleBackButtonPress
       );
-  }, []);
+  }, [navState.canGoBack]);
 
   return (
     <Screen>
       <WebView
-        source={{ uri: "http://192.168.0.35:3002" }}
+        source={{ uri: PROFILE_SCREEN_URL }}
         ref={webviewRef}
         onMessage={handleMessage}
         injectedJavaScript={script}
+        onNavigationStateChange={setNavState}
       />
     </Screen>
   );
