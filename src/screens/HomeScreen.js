@@ -10,7 +10,7 @@ import useToken from "../hooks/useToken";
 
 const { HOME_SCREEN_URL } = getEnvVars();
 
-function HomeScreen() {
+function HomeScreen({ navigation }) {
   const webviewRef = useRef();
 
   const [base64, setBase64] = useState("");
@@ -43,11 +43,19 @@ function HomeScreen() {
     }
 
     if (messageFromWebView === "open gallery") {
-      pickImage();
+      return pickImage();
     }
 
     if (messageFromWebView === "navigationStateChange") {
-      setNavState(nativeEvent);
+      return setNavState(nativeEvent);
+    }
+
+    const parsedMessage = JSON.parse(messageFromWebView);
+
+    if (parsedMessage.type === "PAYMENT") {
+      const { userCode, data } = parsedMessage;
+
+      navigation.push("Payment", { userCode, data });
     }
   };
 

@@ -16,13 +16,29 @@
     },
     "assetBundlePatterns": ["**/*"],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "infoPlist": {
+        "LSApplicationQueriesSchemes": ["payco"]
+      },
+      "NSAppTransportSecurity": {
+        "NSAllowsArbitraryLoads": true,
+        "NSAllowsArbitraryLoadsInWebContent": true
+      }
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "intentFilters": [
+        {
+          "action": "VIEW",
+          "category": ["DEFAULT", "BROWSABLE"],
+          "data": {
+            "scheme": "payco"
+          }
+        }
+      ]
     },
     "web": {
       "favicon": "./assets/favicon.png"
