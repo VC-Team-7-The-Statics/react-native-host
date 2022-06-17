@@ -164,7 +164,6 @@ const styles = StyleSheet.create({
   },
   messages: {
     flex: 1,
-    padding: 15,
   },
   friendMessageBox: {
     padding: 10,
@@ -172,6 +171,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#eaeaea",
     marginVertical: 5,
     marginRight: 100,
+    marginLeft: 15,
   },
   myMessageBox: {
     padding: 10,
@@ -179,6 +179,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#d1ecc8",
     marginVertical: 5,
     marginLeft: 100,
+    marginRight: 15,
   },
   friendText: {
     alignSelf: "flex-start",
@@ -190,6 +191,8 @@ const styles = StyleSheet.create({
   },
   inputContainer: {
     flexDirection: "row",
+    padding: 15,
+    backgroundColor: "#ffffff",
   },
   input: {
     backgroundColor: "#eaeaea",
