@@ -1,10 +1,10 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
+import { Foundation } from "@expo/vector-icons";
 
 import HomeScreen from "./src/screens/HomeScreen";
 import ChatListStackNavigator from "./src/navigation/StackNavigation";
 import ProfileStackNavigator from "./src/navigation/ProfileStackNavigation";
-import { Foundation } from "@expo/vector-icons";
 
 const Tab = createBottomTabNavigator();
 
