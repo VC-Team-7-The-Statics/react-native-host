@@ -28,7 +28,7 @@ Sinder 프로젝트에서 Entry, Chats, Profile 리포지토리를 로딩하는 
     │   └── useToken.js
     ├── navigation
     │   ├── ProfileStackNavigation.js
-    │   └── StackNavigation.js
+    │   └── ChatListStackNavigation.js
     ├── screens
     │   ├── ChatListScreen.js
     │   ├── ChatRoomScreen.js
