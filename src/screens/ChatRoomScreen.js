@@ -98,18 +98,18 @@ function ChatRoomScreen({ route }) {
     <Screen>
       <View style={styles.thumbnailContainer}>
         <Image
-          source={{ uri: friendImage || friendInfoAsync.image }}
+          source={{ uri: friendImage || friendInfoAsync.image || "" }}
           style={styles.thumbnail}
         />
         <Text style={styles.thumbnailText} numberOfLines={1}>
-          {friendName || friendInfoAsync.name}
+          {friendName || friendInfoAsync.name || ""}
         </Text>
         <Text>{error}</Text>
       </View>
       <View style={styles.messages}>
         <FlatList
           data={chats.slice().reverse()}
-          keyExtractor={(chat) => chat.createdAt}
+          keyExtractor={(chat, i) => `${chat.createdAt} ${i}`}
           inverted
           renderItem={({ item: chat }) => (
             <View
