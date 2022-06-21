@@ -3,7 +3,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { Foundation } from "@expo/vector-icons";
 
 import HomeScreen from "./src/screens/HomeScreen";
-import ChatListStackNavigator from "./src/navigation/StackNavigation";
+import ChatListStackNavigator from "./src/navigation/ChatListtackNavigation";
 import ProfileStackNavigator from "./src/navigation/ProfileStackNavigation";
 
 const Tab = createBottomTabNavigator();
